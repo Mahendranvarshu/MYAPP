@@ -1,0 +1,119 @@
+
+h1{
+    color: rgb(33, 50, 12);
+    text-shadow: violet;
+    text-shadow: 13vmax;
+  
+  }
+  
+.h22{
+  
+  color: rgb(33, 50, 12);
+  text-shadow: violet;
+  text-shadow: 13vmax;
+
+}
+
+.enter{
+    color: rgb(31, 34, 34);
+  text-shadow:200px rgb(25, 23, 25);
+  
+    
+}
+
+
+.rectangular-container {
+  width: 600px; /* Set the desired width */
+  height: 400px; /* Set the desired height */
+  background-color: #cde1f2; /* Set the background color */
+  border: 2px solid #c2e8f3; /* Set border thickness and color */
+  align-self: center;
+  align-content: center;
+  
+  vertical-align: top;
+  box-shadow: 0 0 20px rgba(53, 11, 242, 0.2); /* Add a box shadow */
+ 
+}
+.rectangular-container-p1 {
+  width: 600px; /* Set the desired width */
+  height: 600px; /* Set the desired height */
+  background-color: #cde1f2; /* Set the background color */
+  border: 2px solid #c2e8f3; /* Set border thickness and color */
+  align-self:auto;
+  align-content:flex-end;
+  vertical-align:bottom;
+  box-shadow: 0 0 20px rgba(53, 11, 242, 0.2); /* Add a box shadow */
+ 
+
+  
+}
+
+.inbox {
+    
+    background-color: #faeeee; /* Set the background color */
+    border: 2px solid #333; /* Set border thickness and color */
+    
+    box-shadow: 0 0 200px rgba(56, 22, 205, 0.2); /* Add a box shadow */
+   
+ 
+    
+}
+
+.rectangular-container p {
+    margin: 0; /* Remove default margin for the paragraph */
+}
+
+/* CSS for the Popup Components */
+.popup {
+  position: fixed;
+  scroll-snap-align:inherit;
+  right: 200px; /* Start off-screen on the right */
+  top: 80px;
+ 
+  width: 500px; /* Adjust the width as needed */
+  height: auto;
+ 
+  justify-content: space-between; 
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.6); /* Add shadow for depth */
+  transition: right 0.3s ease-in-out; /* Transition for smooth appearance */
+  z-index: 999; /* Set a high z-index to bring the popup to the front */
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+button {
+  margin-left: 1px;
+}
+.close-button2 {
+  margin-left: 700px;
+  margin-top: 2%;
+  
+}
+
+  
+
+.form-group {
+  margin-bottom: 15px; 
+   
+}
+
+/* Style the submit button */
+.btn-primary {
+  margin-top: 15px; /* Add margin to the submit button */
+}
+
+.popCL{
+  position: fixed;
+  right:5%;
+  bottom: auto; /* Start off-screen on the right */
+  top: 90px;
+  width: 800px; /* Adjust the width as needed */
+  height: auto; 
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.6); /* Add shadow for depth */
+  transition: right 0.3s ease-in-out; /* Transition for smooth appearance */
+  z-index: 999; /* Set a high z-index to bring the popup to the front */
+}

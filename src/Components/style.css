@@ -1,0 +1,72 @@
+
+h1{
+    color: rgb(33, 50, 12);
+    text-shadow: violet;
+    text-shadow: 13vmax;
+  
+  }
+  
+.h22{
+  
+  color: rgb(33, 50, 12);
+  text-shadow: violet;
+  text-shadow: 13vmax;
+
+}
+
+.enter{
+    color: rgb(31, 34, 34);
+  text-shadow:200px rgb(25, 23, 25);
+  
+    
+}
+
+
+.rectangular-container {
+  width: 600px; /* Set the desired width */
+  height: 400px; /* Set the desired height */
+  background-color: #cde1f2; /* Set the background color */
+  border: 2px solid #c2e8f3; /* Set border thickness and color */
+  align-self: center;
+  align-content: center;
+  vertical-align: top;
+  box-shadow: 0 0 20px rgba(53, 11, 242, 0.2); /* Add a box shadow */
+ 
+}
+
+
+.fill{
+
+color: #cde1f2;
+
+}
+.rectangular-container-p1 {
+  width: 600px; /* Set the desired width */
+  height: 600px; /* Set the desired height */
+  background-color: #cde1f2; /* Set the background color */
+  border: 2px solid #c2e8f3; /* Set border thickness and color */
+  align-self:auto;
+  align-content:flex-end;
+  vertical-align:bottom;
+  box-shadow: 0 0 20px rgba(53, 11, 242, 0.2); /* Add a box shadow */
+ 
+
+  
+}
+
+.inbox {
+    
+    background-color: #b2bad8; /* Set the background color */
+    border: 2px solid #333; /* Set border thickness and color */
+    
+    box-shadow: 0 0 200px rgba(56, 22, 205, 0.2); /* Add a box shadow */
+   
+ 
+    
+}
+
+.rectangular-container p {
+    margin: 0; /* Remove default margin for the paragraph */
+}
+
+

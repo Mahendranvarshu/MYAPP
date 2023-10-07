@@ -1,0 +1,112 @@
+.App {
+  text-align:start;
+
+color: #61dafb;
+}
+
+h1{
+  color: rgb(36, 193, 207);
+  text-shadow: violet;
+  text-shadow: 11cqh;
+
+}
+App22{
+  box-sizing: border-box;
+}
+label{
+  color: #101010;
+  font-size:large;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #f4f4ed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.smokey-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha (last) value for transparency */
+  z-index: 9999; /* Ensure it's on top of other elements */
+}
+
+.smoke {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.3); /* Smoke color with transparency */
+  border-radius: 50%;
+  animation: float 5s infinite linear; /* Add animation for smoke */
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-100px) rotate(180deg);
+    opacity: 0.1;
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+
+/* SpringLogo.css */
+
+.spring-logo {
+  position: absolute;
+  animation: float 3s infinite alternate ease-in-out; /* Add animation for floating */
+
+  /* Adjust the size and position of your logo as needed */
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
