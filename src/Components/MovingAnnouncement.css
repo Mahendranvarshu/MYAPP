@@ -1,0 +1,38 @@
+.moving-announcement {
+    
+    bottom: 0;
+    left: -100%;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    animation: moveForward 3s ease-out infinite, fadeInOut 5s;
+  }
+  
+  .show {
+    animation-play-state: running;
+    left: 0;
+  }
+  
+  .hide {
+    animation-play-state: paused;
+    left: -100%;
+  }
+  
+  @keyframes moveForward {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  

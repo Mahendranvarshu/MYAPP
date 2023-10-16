@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 import Newsletter from "../Components/Newsletter";
+ // Import your background image
+ import '../Components/TextMovingAnimation.css';
+
 
 import { mobile } from "../responsive";
 import Productcatelog from "../Components/Productcatelog";
 
-const Container = styled.div``;
+const Container = styled.div`
+background-color: #fcf5f5`;
 
 const Title = styled.h1`
   margin: 20px;
@@ -37,7 +41,10 @@ const Option = styled.option``;
 
 const ProductList = () => {
   return (
-    <Container>
+    <Container >
+        <div className="text-moving-animation">
+      <p>Super Deal! Free Shipping on Orders Over $50</p>
+    </div>
      
       <Title>Dresses</Title>
       <FilterContainer>

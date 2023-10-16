@@ -37,7 +37,8 @@ const CustomerList = ({ onClose }) => {
         setCustomers((prevCustomers) =>
           prevCustomers.filter((customer) => customer.id !== customerId)
         );
-      })
+      })    
+      
       .catch((error) => {
         console.error('Error deleting customer:', error);
       });

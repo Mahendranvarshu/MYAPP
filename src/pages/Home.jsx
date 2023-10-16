@@ -6,21 +6,21 @@ import React from "react";
 //import Newsletter from "../components2/Newsletter";
 import ProductList from "./ProductList";
 import Navbar from "../Components/Navbar";
-import Announcement from "../Components/Announcement";
+//import Announcement from "../Components/Announcement";
 //import Newsletter from "../components/Newsletter";
 import Footer from "../Components/Footer";
 //import Products from "../components2/Products";
 //import Slider from "../components2/Slider";
 
-
+   
 
 const Home = () => {
   return (
-    <div  >
+    <div className="div2"  >
 
 
      <Navbar/>
-     <Announcement/>
+    
       <ProductList/>
       
       <Footer/>

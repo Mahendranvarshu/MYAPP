@@ -1,0 +1,31 @@
+.text-moving-animation {
+    white-space: nowrap;
+    overflow: visible;
+    position: relative;
+    animation: moveLeftToRight 10s linear infinite;
+    color: transparent;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+   
+    background: linear-gradient(45deg, #ffcc00, #ff00cc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .text-moving-animation p {
+    display: inline-block;
+    padding-right: 100%;
+  }
+  
+  @keyframes moveLeftToRight {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  

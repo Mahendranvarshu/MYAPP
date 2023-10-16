@@ -1,18 +1,12 @@
-import styled from "styled-components";
+import React from 'react';
+import './TextMovingAnimation.css'; // Import your CSS file for styling
 
-const Container = styled.div`
-  height: 30px;
-  background-color: teal;
-  color: blue;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 500;
-`;
+function TextMovingAnimation() {
+  return (
+    <div className="text-moving-animation">
+      <p>Super Deal! Free Shipping on Orders Over $50</p>
+    </div>
+  );
+}
 
-const Announcement = () => {
-  return <Container>Super Deal! Free Shipping on Orders Over $50</Container>;
-};
-
-export default Announcement;
+export default TextMovingAnimation;
