@@ -6,7 +6,7 @@ import { mobile } from "../responsive";
 import CustomerForm from "./CustomerForm";
 import ProductForm from "./ProductForm";
 import CustomerList from "./CustomerList";
-import RegistrationForm from "./RegistrationForm";
+import Register from "../pages/Register";
 import ProductListview from "../Components/ProductListview";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
@@ -14,6 +14,7 @@ import Login from "../pages/Login";
 const Container = styled.div`
   background: linear-gradient(45deg, #FF5733, #0052D4);/* Blue background */
   color: #fff; /* White text color */
+  ${mobile({ padding: "10px 0" })}
   padding: 20px 0; /* Increased padding to raise the Navbar height */
 `;
 
@@ -121,7 +122,7 @@ const Navbar = () => {
           <MenuItem onClick={() => openPopup('ProductForm')}>ProductForm</MenuItem>
           <MenuItem onClick={() => openPopup('ProductList')}>ProductList</MenuItem>
           <MenuItem onClick={() => openPopup('Customerdetails')}>CustomerDetails</MenuItem>
-          <MenuItem onClick={() => openPopup('RegisterForm')}>REGISTER</MenuItem>
+          <MenuItem onClick={() => openPopup('Register')}>REGISTER</MenuItem>
           <MenuItem onClick={() => openPopup('signup')}>SIGN IN</MenuItem>
           <MenuItem onClick={() => openPopup('Shopcart')}>
             <Badge badgeContent={4} color="primary">
@@ -133,7 +134,7 @@ const Navbar = () => {
       {selectedMenuItem === 'CustomerForm' && <CustomerForm onClose={closePopup} />}
       {selectedMenuItem === 'ProductForm' && <ProductForm onClose={closePopup} />}
       {selectedMenuItem === 'Customerdetails' && <CustomerList onClose={closePopup} />}
-      {selectedMenuItem === 'RegisterForm' && <RegistrationForm onClose={closePopup} />}
+      {selectedMenuItem === 'Register' && <Register onClose={closePopup} />}
       {selectedMenuItem === 'ProductList' && <ProductListview onClose={closePopup} />}
       {selectedMenuItem === 'signup' && <Login onClose={closePopup} />}
       {selectedMenuItem === 'Shopcart' && <Cart onClose={closePopup} />}

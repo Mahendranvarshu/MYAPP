@@ -1,116 +1,163 @@
-import React, { useState } from 'react';
-import { FormLabel } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './style2.css';
+import React, { useState} from "react";
+import styled from "styled-components";
+import { mobile } from "../responsive";
+import { ProgressBar } from "react-bootstrap";
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  ),
+    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  z-index: 999;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+  background-color: #f5fbfd;
+  position: relative;
+  padding: 20px;
+`;
 
+const Wrapper = styled.div`
+  width: 25%;
+  padding: 20px;
+  background-color: white;
+  ${mobile({ width: "75%" })}
+`;
 
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: 300;
+`;
 
-const CustomerForm = ({ onClose }) =>  {
-    const [customer, setCustomer] = useState({
-        name: '',
-        address: '',
-        phone_no: '',
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  min-width: 40%;
+  margin: 20px 10px 0px 0px;
+  padding: 10px;
+`;
+
+const Agreement = styled.span`
+  font-size: 12px;
+  margin: 20px 0px;
+`;
+
+const Button = styled.button`
+  width: 40%;
+  border: none;
+  padding: 15px 20px;
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+`;
+
+const SuccessMessage = styled.div`
+  width: 100%;
+  text-align: center;
+  color: green;
+`;
+
+const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    password: "",
+  });
+  const [successMessage, setSuccessMessage] = useState("");
+  const [progress, setProgress] = useState(0); // Track progress
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setCustomer({
-            ...customer,
-            [name]: value,
-        });
-    };
+    // Calculate progress based on the number of completed fields
+    const fields = Object.values(formData).filter(Boolean);
+    const newProgress = (fields.length / Object.keys(formData).length) * 100;
+    setProgress(newProgress);
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8080/Customer/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.status === 200) {
+        setSuccessMessage( <h1>Login successfully</h1>);
+        // Clear the success message after a certain time (e.g., 3 seconds)
+        setTimeout(() => setSuccessMessage(""), 3000);
+        // You can also redirect to a success page here
+      }
+      else if (response.status === 202) {
+        setSuccessMessage( <h1>User Not Found</h1>);
+        // Clear the success message after a certain time (e.g., 3 seconds)
+        setTimeout(() => setSuccessMessage(""), 3000);
+        // You can also redirect to a success page here
+      }
+      else if (response.status === 400) {
+        setSuccessMessage( <h1>password its Wrong</h1>);
+        // Clear the success message after a certain time (e.g., 3 seconds)
+        setTimeout(() => setSuccessMessage(""), 3000);
+        // You can also redirect to a success page here
+      }
+       else {
+        // Handle the case where the request was not successful (e.g., show an error message)
+      }
+    } catch (error) {
+      console.error("An error occurred while login the customer: ", error);
+    }
+  };
 
-        fetch('http://localhost:8080/Customer/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(customer),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log('Customer created:', data);
-                // Handle success, reset form, or navigate to a different page
-                toast.success('Customer created successfully!', {
-                    position: 'top-right',
-                    autoClose: 3000, // Close the message after 3 seconds
-                });
-                // Handl
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                // Handle the error, show an error message, etc.
-            });
-    };
-
-    return (
+  return (
+    <Container>
+      <Wrapper>
+        <Title>LOGIN AN ACCOUNT</Title>
+        {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+        <ProgressBar progress={progress} /> {/* Progress bar component */}
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="name"
+            placeholder="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+          
+          <Input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          <Agreement>
+            By creating an account, I consent to the processing of my personal
+            data in accordance with the <b>PRIVACY POLICY</b>
+          </Agreement>
+          <Button type="submit">LOGIN</Button>
         
-        
-        <div className="popup">
-        <div className="row">
-          <div className="col-md-6 mx-auto">
-            <form onSubmit={handleSubmit}>
-              <div className="popup-content">
-                <button onClick={onClose} className="btn btn-primary">
-                  Close
-                </button>
-                <div className="enter">
-                  <h2>PLEASE ENTER</h2>
-                </div>
-      
-                <div className="form-group">
-                  <FormLabel htmlFor="name">Name:</FormLabel>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    value={customer.name}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="address">Address:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="address"
-                    name="address"
-                    value={customer.address}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone_no">Phone Number:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="phone_no"
-                    name="phone_no"
-                    value={customer.phone_no}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Create Customer
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <ToastContainer />
-      </div>
-      
-    );
-}
+        </Form>
+      </Wrapper>
+    </Container>
+  );
+};
 
-export default CustomerForm;
+export default Register;

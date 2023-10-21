@@ -67,10 +67,12 @@ color: #cde1f2;
 
 .div2{
   background: linear-gradient(45deg, rgba(255, 87, 51, 0.7), rgba(0, 82, 212, 0.7));
+  
 }
 
 .rectangular-container p {
     margin: 0; /* Remove default margin for the paragraph */
 }
+
 
 

@@ -16,7 +16,7 @@
   }
   
   .text-moving-animation p {
-    display: inline-block;
+    display:flexbox;
     padding-right: 100%;
   }
   
@@ -24,8 +24,8 @@
     0% {
       transform: translateX(100%);
     }
-    100% {
-      transform: translateX(-100%);
+    0% {
+      transform: translateX(100%);
     }
   }
   
