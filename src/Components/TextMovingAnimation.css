@@ -6,6 +6,8 @@
     color: transparent;
     text-align: center;
     font-size: 30px;
+    text-shadow: 6px 6px 8px rgba(32, 71, 227, 0.5);
+
     font-weight: bold;
    
     background: linear-gradient(45deg, #ffcc00, #ff00cc);

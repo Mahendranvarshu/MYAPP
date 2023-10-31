@@ -122,7 +122,7 @@ const Register = () => {
         setTimeout(() => setSuccessMessage(""), 3000);
         // You can also redirect to a success page here
       } 
-      else if (response.status === 201) {
+      else if (response.status === 200) {
         setSuccessMessage( <h1>Customer created successfully</h1>);
         // Clear the success message after a certain time (e.g., 3 seconds)
         setTimeout(() => setSuccessMessage(""), 3000);
@@ -165,9 +165,9 @@ const Register = () => {
             onChange={handleInputChange}
           />
           <Input
-            type="email"
+            type="text"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
           />

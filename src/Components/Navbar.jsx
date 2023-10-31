@@ -10,14 +10,21 @@ import Register from "../pages/Register";
 import ProductListview from "../Components/ProductListview";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
+import logo from '../pages/favicon.ico';
 
 const Container = styled.div`
-  background: linear-gradient(45deg, #FF5733, #0052D4);/* Blue background */
-  color: #fff; /* White text color */
-  ${mobile({ padding: "10px 0" })}
-  padding: 20px 0; /* Increased padding to raise the Navbar height */
+  background: #fcf5f5;/* Blue background */
+  color:#fcf5f5; /* White text color */
+  
+  padding: 15px 0; /* Increased padding to raise the Navbar height */
 `;
-
+const Container2 = styled.div`
+  background: linear-gradient(15deg, #FF5733, #0052D4); /* Blue background */
+  color: #fff; /* White text color */
+  box-shadow: 5px 5px 10px rgba(0, 82, 212, 0.7); /* Fixed the shadow property */
+  padding: 10px 0; /* Increased padding to raise the Navbar height */
+  border-radius: 10px; /* Add rounded corners with a specific radius */
+`;
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -70,7 +77,7 @@ const Logo = styled.h1`
    /* Convert text to uppercase */
   letter-spacing: 4px; /* Add letter spacing for a more stylish look */
   margin: 5; /* Remove any default margins */
-  padding: 10px; /* Add some padding for spacing */
+  padding: 0px; /* Add some padding for spacing */
   /* Add an underline with a different color */
   text-shadow: 4px 4px 0 #000, 8px 8px 0 #ff5733; /* Create a 3D text effect with text-shadow */
   transition: transform 0.2s ease-in-out; /* Add a transition effect */
@@ -84,11 +91,20 @@ const Right = styled.div`
   display: flex;
   align-items: center;
 `;
+const LogoImage = styled.img`
+  width: 70px; /* Set the width and height as per your preference */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add some margin to separate the logo from other elements */
+  
+  `;
+
 
 const MenuItem = styled.div`
   font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
-  margin-left: 25px;
+  margin-left: 12px;
+  text-transform: uppercase; /* Make text uppercase */
 
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
@@ -106,6 +122,7 @@ const Navbar = () => {
 
   return (
     <Container>
+      <Container2>
       <Wrapper>
         <Left>
           <Language>EN</Language>
@@ -115,6 +132,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
+        <LogoImage src={logo} />
           <Logo>MahiShop.in</Logo>
         </Center>
         <Right>
@@ -138,6 +156,7 @@ const Navbar = () => {
       {selectedMenuItem === 'ProductList' && <ProductListview onClose={closePopup} />}
       {selectedMenuItem === 'signup' && <Login onClose={closePopup} />}
       {selectedMenuItem === 'Shopcart' && <Cart onClose={closePopup} />}
+      </Container2>
     </Container>
   );
 };

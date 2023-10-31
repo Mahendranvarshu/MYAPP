@@ -1,6 +1,6 @@
 import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
-
+import React, { useState,useEffect} from "react";
 
 
 import { mobile } from "../responsive";
@@ -30,6 +30,7 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-weight: 300;
   text-align: center;
+  color:black;
 `;
 
 const Top = styled.div`
@@ -37,6 +38,7 @@ const Top = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  color:black;
 `;
 
 const TopButton = styled.button`
@@ -50,11 +52,13 @@ const TopButton = styled.button`
 `;
 
 const TopTexts = styled.div`
+color:black;
   ${mobile({ display: "none" })}
 `;
 const TopText = styled.span`
   text-decoration: underline;
   cursor: pointer;
+  color:black;
   margin: 0px 10px;
 `;
 
@@ -66,6 +70,7 @@ const Bottom = styled.div`
 `;
 
 const Info = styled.div`
+color:black;
   flex: 3;
 `;
 
@@ -101,6 +106,12 @@ const ProductColor = styled.div`
   border-radius: 50%;
   background-color: ${(props) => props.color};
 `;
+const OuterContainer = styled.div`
+  height: 70vh; /* Set a fixed height for the scrollable container */
+  overflow: auto; /* Add a scrollbar if the content overflows the container */
+`;
+
+
 
 const ProductSize = styled.span``;
 
@@ -126,13 +137,23 @@ const ProductAmount = styled.div`
 
 const ProductPrice = styled.div`
   font-size: 30px;
+  color:black;
   font-weight: 200;
   ${mobile({ marginBottom: "20px" })}
+
+  background-color: lightblue;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  padding: 20px;
+
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+
 `;
 
 const Hr = styled.hr`
   background-color: #eee;
   border: none;
+  color:black;
   height: 1px;
 `;
 
@@ -141,15 +162,19 @@ const Summary = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
+  
+  color:black;
   height: 50vh;
 `;
 
 const SummaryTitle = styled.h1`
+color:black;
   font-weight: 200;
 `;
 
 const SummaryItem = styled.div`
   margin: 30px 0px;
+  color:black;
   display: flex;
   justify-content: space-between;
   font-weight: ${(props) => props.type === "total" && "500"};
@@ -168,99 +193,141 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-const Cart = ({onClose}) => {
-  return (
-    <Container>
-    
-      <Wrapper>
-        <Title>YOUR BAG</Title>
-        <Top>
-          <TopButton onClick={onClose} >CONTINUE SHOPPING</TopButton>
-          <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
-          </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
-        </Top>
-        <Bottom>
-          <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>Size:</b> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 20</ProductPrice>
-              </PriceDetail>
-            </Product>
-          </Info>
-          <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-            <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem type="total">
-              <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
-            </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
-          </Summary>
-        </Bottom>
-      </Wrapper>
-  
-    </Container>
-  );
+  const Cart = ({ onClose }) => {
+
+// Update your Product component within the Info section:
+const removeProduct = (productId) => {
+  // Send a DELETE request to your server to remove the product from the cart
+  fetch(`http://localhost:8080/Order/removeFromCart/${productId}`, {
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        // Product removed successfully, update the UI
+          const updatedProducts = products.filter(
+            (product) => product.product_ID !== productId
+          );
+        setProducts(updatedProducts);
+      } else {
+        // Handle errors if needed
+      }
+    })
+    .catch((error) => console.error('Error removing product:', error));
 };
 
-export default Cart;
+
+    const [products, setProducts] = useState([]);
+  
+    useEffect(() => {
+      // Fetch product data from your API
+      fetch("http://localhost:8080/Order/getcartP")
+        .then((response) => response.json())
+        .then((data) => setProducts(data))
+        .catch((error) => console.error("Error fetching data:", error));
+    }, []);
+  
+    return (
+      <Container>
+        <Wrapper>
+          <Title>YOUR BAG</Title>
+          <Top>
+            <TopButton onClick={onClose}>CONTINUE SHOPPING</TopButton>
+            <TopTexts>
+              <TopText>Shopping Bag({products.length})</TopText>
+              <TopText>Your Wishlist (0)</TopText>
+            </TopTexts>
+            <TopButton type="filled">CHECKOUT NOW</TopButton>
+          </Top>
+          <Bottom>
+          <OuterContainer>
+            <Info>
+              {products.map((product) => (
+               
+                <Product key={product.product_ID}>
+
+                  <ProductDetail>
+                    <Image src={`data:image/png;base64,${product.image}`} />
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b> {product.product_name}
+                      </ProductName>
+                      <ProductId>
+                        <b>Brand:</b> {product.brand_name}
+                      </ProductId>
+                      <ProductColor color={product.brand_name} />
+                      <ProductSize>
+                        <b>Warrenty:  {product.warenty}Year </b>
+                      </ProductSize>
+                      <Button
+  onClick={() => removeProduct(product.product_ID)}
+  style={{
+    color: 'white',
+    background: 'linear-gradient(45deg, #FF5733, #0052D4)',
+    padding: '5px',
+    borderRadius: '6px',
+    boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.4)'
+  }}
+>
+  Remove
+</Button>
+
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Add />
+                      <ProductAmount>{product.stack}</ProductAmount>
+                      <Remove />
+                    </ProductAmountContainer>
+                    <ProductPrice>$ {product.price}</ProductPrice>
+                  </PriceDetail>
+                  
+                </Product>
+                
+              ))}
+              <Hr />
+            </Info>
+              </OuterContainer>
+            <Summary>
+              <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+              <SummaryItem>
+                <SummaryItemText>Subtotal</SummaryItemText>
+                <SummaryItemPrice>$ {calculateSubtotal(products)}</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText>Estimated Shipping</SummaryItemText>
+                <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryItemText>Shipping Discount</SummaryItemText>
+                <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              </SummaryItem>
+               <SummaryItem >
+                <SummaryItemText>GST Rate</SummaryItemText>
+                <SummaryItemPrice>$ 10</SummaryItemPrice>
+              </SummaryItem>
+              <SummaryItem type="total">
+                <SummaryItemText>Total</SummaryItemText>
+                <SummaryItemPrice>
+                  $ {calculateSubtotal(products) + 5.90 - 5.90 +10}
+                </SummaryItemPrice>
+              </SummaryItem>
+              <Button>CHECKOUT NOW</Button>
+            </Summary>
+          </Bottom>
+        </Wrapper>
+      </Container>
+    );
+  };
+  
+  export default Cart;
+  const calculateSubtotal = (products) => {
+    return products.reduce(
+      (total, product) => total + product.price,
+      0
+    );
+  };
+
+  
+
+

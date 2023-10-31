@@ -41,7 +41,7 @@ function ProductForm() {
     category: '',
     stack: '',
     warenty: '',
-    offer_end_date: '',
+    offerEnd_date: '',
   });
   const [File, setFile] = useState(null);
 
@@ -148,11 +148,11 @@ function ProductForm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                name="offer_end_date"
+                name="offerEnd_date"
                 label="Offer End Date"
                 fullWidth
                 type="text"
-                value={product.offer_end_date}
+                value={product.offerEnd_date}
                 onChange={handleInputChange}
               />
             </Grid>

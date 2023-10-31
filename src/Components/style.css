@@ -43,7 +43,7 @@ color: #cde1f2;
 .rectangular-container-p1 {
   width: 600px; /* Set the desired width */
   height: 600px; /* Set the desired height */
-  background-color: #cde1f2; /* Set the background color */
+  background-color: #b8ddfc; /* Set the background color */
   border: 2px solid #c2e8f3; /* Set border thickness and color */
   align-self:auto;
   align-content:flex-end;
@@ -56,7 +56,7 @@ color: #cde1f2;
 
 .inbox {
     
-    background-color: #b2bad8; /* Set the background color */
+    background-color: #f6d1d1; /* Set the background color */
     border: 2px solid #333; /* Set border thickness and color */
     
     box-shadow: 0 0 200px rgba(56, 22, 205, 0.2); /* Add a box shadow */
@@ -66,7 +66,7 @@ color: #cde1f2;
 }
 
 .div2{
-  background: linear-gradient(45deg, rgba(255, 87, 51, 0.7), rgba(0, 82, 212, 0.7));
+  background: linear-gradient(45deg, rgba(244, 53, 10, 0.7), rgba(0, 82, 212, 0.7));
   
 }
 
