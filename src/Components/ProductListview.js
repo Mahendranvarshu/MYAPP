@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Paper, Table, TableHead, TableBody, TableRow, TableCell, Button, Typography } from '@material-ui/core';
+import {  Paper, Table, TableHead, TableBody, TableRow, TableCell, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+
+import styled from "styled-components";
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  
+  background-size: cover;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  flex: 1;
+  z-index: 999;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+  background-color: #fcf5f5;
+  position: relative;
+  padding: 20px;
+`;
+
+
 const useStyles = makeStyles((theme) => ({
-  container: {
-    display: 'flex',
-    zIndex: 999,
-    width: '80%',
-    backgroundColor: '#cde1f2',
-    justifyContent: 'center',
-    boxShadow: '-2px 0 10px rgba(0, 0, 0, 0.6)',
-    transition: 'right 0.3s ease-in-out',
-    flex: 1,
-    position: 'relative',
-    marginTop: theme.spacing(4),
-  },
+ 
   paper: {
     padding: theme.spacing(2),
-    width: '100%',
+    width: '80%',
   },
   table: {
     marginTop: theme.spacing(2),
@@ -62,7 +72,8 @@ const ProductListview = ({ onClose }) => {
   };
 
   return (
-    <Container className={classes.container}>
+    <Container>
+     
       <Paper className={classes.paper}>
         <Typography variant="h6" align="center" gutterBottom>
           Product List
@@ -112,6 +123,7 @@ const ProductListview = ({ onClose }) => {
         </Table>
        
       </Paper>
+   
     </Container>
   );
 };

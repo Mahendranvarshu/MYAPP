@@ -21,7 +21,6 @@
     "styled-components": "^6.0.8",
     "web-vitals": "^2.1.4"
   },
-  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -34,8 +33,6 @@
       "react-app/jest"
     ]
   },
- 
-
   "browserslist": {
     "production": [
       ">0.2%",
@@ -48,6 +45,4 @@
       "last 1 safari version"
     ]
   }
-  
-
 }

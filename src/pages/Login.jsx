@@ -9,8 +9,8 @@ const Container = styled.div`
     rgba(255, 255, 255, 0.5),
     rgba(255, 255, 255, 0.5)
   ),
-    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
-      center;
+  url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+  center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@ const SuccessMessage = styled.div`
   color: green;
 `;
 
-const Register = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -120,10 +120,15 @@ const Register = () => {
         // You can also redirect to a success page here
       }
        else {
+        setSuccessMessage( <h1>BACKEND IS NOT ALIVE</h1>);
+        // Clear the success message after a certain time (e.g., 3 seconds)
+        setTimeout(() => setSuccessMessage(""), 3000);
         // Handle the case where the request was not successful (e.g., show an error message)
       }
     } catch (error) {
-      console.error("An error occurred while login the customer: ", error);
+      setSuccessMessage( <h1>BACKEND IS NOT ALIVE</h1>);
+      // Clear the success message after a certain time (e.g., 3 seconds)
+      setTimeout(() => setSuccessMessage(""), 3000);
     }
   };
 
@@ -161,4 +166,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

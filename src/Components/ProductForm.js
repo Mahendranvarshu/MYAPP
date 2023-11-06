@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+
 import {
   TextField,
   Button,
-  Container,
+  
   Grid,
   Typography,
   Paper,
@@ -10,18 +11,36 @@ import {
   FormLabel,
 } from '@material-ui/core';
 
+import { mobile } from "../responsive";
+import styled from "styled-components";
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+ 
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  z-index: 999;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+  background-color: #fcf5f5;
+  position: relative;
+  padding: 20px;
+`;
+
+const Wrapper = styled.div`
+  width: 70%;
+  padding: 20px;
+  background-color: white;
+  ${mobile({ width: "75%" })}
+`;
+
+
 const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: theme.spacing(4),
-    zIndex: 999,
-    backgroundColor: '#cde1f2',
-    width: '75%',
-    border: '2px solid #c2e8f3',
-    boxShadow: '-2px 0 10px rgba(0, 0, 0, 0.6)',
-    transition: 'right 0.3s ease-in-out',
-    flex: 1,
-    position: 'relative',
-  },
+ 
   paper: {
     padding: theme.spacing(3),
   },
@@ -82,7 +101,8 @@ function ProductForm() {
   };
 
   return (
-    <Container className={classes.container}>
+    <Container>
+    <Wrapper>
       <Paper className={classes.paper}>
         <Typography variant="h5" gutterBottom>
           Add Product
@@ -176,6 +196,8 @@ function ProductForm() {
           </Button>
         </form>
       </Paper>
+    
+      </Wrapper>
     </Container>
   );
 }

@@ -149,6 +149,7 @@ const Navbar = () => {
           </MenuItem>
         </Right>
       </Wrapper>
+      </Container2>
       {selectedMenuItem === 'CustomerForm' && <CustomerForm onClose={closePopup} />}
       {selectedMenuItem === 'ProductForm' && <ProductForm onClose={closePopup} />}
       {selectedMenuItem === 'Customerdetails' && <CustomerList onClose={closePopup} />}
@@ -156,7 +157,7 @@ const Navbar = () => {
       {selectedMenuItem === 'ProductList' && <ProductListview onClose={closePopup} />}
       {selectedMenuItem === 'signup' && <Login onClose={closePopup} />}
       {selectedMenuItem === 'Shopcart' && <Cart onClose={closePopup} />}
-      </Container2>
+     
     </Container>
   );
 };

@@ -90,7 +90,7 @@
         <div className="row">
           {products.map((product) => (
             <div className="col-md-4 mb-4" key={product.product_ID}>
-              <div className="card" style={{boxShadow: '4px 7px 15px rgba(7, 7, 9, 0.8)' }}>
+              <div className="card" style={{boxShadow: '4px 7px 15px red' }}>
                 <Container>
                   <div className="card-body" style={{ backgroundImage: `url(data:image/png;base64,${product.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                     <h5 className="card-title" style={{ color: 'white',  background: 'linear-gradient(45deg, #FF5733, #0052D4)', padding: '5px', borderRadius: '6px',boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.4)' , width: `${product.product_name.length+2}ch`}}>{product.product_name}</h5>

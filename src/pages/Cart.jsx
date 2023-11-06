@@ -2,7 +2,6 @@ import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
 import React, { useState,useEffect} from "react";
 
-
 import { mobile } from "../responsive";
 
 const Container = styled.div`
@@ -21,6 +20,18 @@ background-color: #f5fbfd;
 position: relative;
 padding: 20px;
 `;
+
+const SuccessMessage = styled.div`
+width: 80%;
+text-align: center;
+color: red; /* White text color */
+/* Add padding for better spacing */
+font-weight:  bold;; /* Bold text */
+font-size: 30px; /* Font size */
+text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+
+`;
+
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -195,6 +206,33 @@ const Button = styled.button`
 
   const Cart = ({ onClose }) => {
 
+    const [successMessage, setSuccessMessage] = useState("");
+   // Track progress
+  
+    const Bookorder = (price) => {
+      // Send a DELETE request to your server to remove the product from the cart
+      fetch(`http://localhost:8080/Order/Bookorder/${price}`, {
+        method: 'POST',
+      })
+        .then((response) => {
+          if (response.status === 201) {
+            // Product removed successfully, update the UI
+  
+            setSuccessMessage( <h1>Order Placed Successfully </h1>);
+        // Clear the success message after a certain time (e.g., 3 seconds)
+        setTimeout(() => setSuccessMessage(""), 4000);
+
+          } else {
+            setSuccessMessage( 'Order Already Placed' );
+            // Clear the success message after a certain time (e.g., 3 seconds)
+            setTimeout(() => setSuccessMessage("check  Order Conformation for in your Mail"), 4000);
+    
+          }
+        })
+        .catch((error) => console.error('Error removing product:', error));
+    };
+    
+
 // Update your Product component within the Info section:
 const removeProduct = (productId) => {
   // Send a DELETE request to your server to remove the product from the cart
@@ -299,8 +337,8 @@ const removeProduct = (productId) => {
                 <SummaryItemPrice>$ 5.90</SummaryItemPrice>
               </SummaryItem>
               <SummaryItem>
-                <SummaryItemText>Shipping Discount</SummaryItemText>
-                <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                <SummaryItemText>Delivery Charge</SummaryItemText>
+                <SummaryItemPrice>$ 7.5</SummaryItemPrice>
               </SummaryItem>
                <SummaryItem >
                 <SummaryItemText>GST Rate</SummaryItemText>
@@ -309,10 +347,12 @@ const removeProduct = (productId) => {
               <SummaryItem type="total">
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>
-                  $ {calculateSubtotal(products) + 5.90 - 5.90 +10}
+                  $ {calculateSubtotal(products) + 5.90 + 7.5 +10}
                 </SummaryItemPrice>
+              
               </SummaryItem>
-              <Button>CHECKOUT NOW</Button>
+              {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+              < Button onClick ={() => Bookorder(  calculateSubtotal(products) + 5.90 - 5.90 +10)}><h5>SUBMIT THE ORDER</h5></Button>
             </Summary>
           </Bottom>
         </Wrapper>

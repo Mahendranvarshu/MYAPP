@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
 
 import Login from "../pages/Login";
+import Error from "../pages/Error";
 
 import Newsletter from "../Components/Newsletter";
  // Import your background image
@@ -59,16 +60,39 @@ const ProductList = () => {
 
   const [showLogin, setShowLogin] = useState(false); // State to control the display of the Login component
 
+  const [showError, setShowError] = useState(true);
+
+
   useEffect(() => {
+ 
     // Fetch data from your Spring Boot API
     fetch('http://localhost:8080/Customer/get') // Replace with your API endpoint
-      .then((response) => response.json())
+      .then((response) => {
+        
+        if (response.ok) {
+          setShowError(false);
+          return response.json();
+
+          
+        } else if (response.status === 404) {
+          setShowLogin(true); // Set the state to show the Login component
+          setShowError(false); // Set the state to hide the error component
+          throw new Error('Not Found');
+          
+        } 
+        
+      })
       .then((data) => {
         setCustomer(data); // Update the state with the fetched data
       })
       .catch((error) => {
-        setShowLogin(true); // Set the state to show the Login component
+        
+        
+       
       });
+    
+     
+    
   }, []);
 
   return (
@@ -79,10 +103,12 @@ const ProductList = () => {
    
     
     <Container >
-       {showLogin && <Login />}
         <div className="text-moving-animation">
       <p >Super Deal! Free Shipping on Orders Over $50</p>
     </div>
+       {showLogin && <Login />}
+       {showError && <Error />}
+      
      
       <Title>Hi  {customer.name}</Title>
       <FilterContainer>
