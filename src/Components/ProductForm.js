@@ -16,7 +16,9 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
- 
+  background:
+  url("https://c8.alamy.com/comp/KXDA03/devices-top-view-3d-rendering-KXDA03.jpg")
+  center;
   background-size: cover;
   display: flex;
   align-items: center;

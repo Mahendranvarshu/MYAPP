@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { ProgressBar } from "react-bootstrap";
+import { RotatingLines } from "react-loader-spinner";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -9,7 +10,7 @@ const Container = styled.div`
     rgba(255, 255, 255, 0.5),
     rgba(255, 255, 255, 0.5)
   ),
-  url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+  url("https://st3.depositphotos.com/1607243/17947/i/1600/depositphotos_179477944-stock-photo-different-modern-devices-collection-rendering.jpg")
   center;
   background-size: cover;
   display: flex;
@@ -31,6 +32,13 @@ const Wrapper = styled.div`
   background-color: white;
   ${mobile({ width: "75%" })}
 `;
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+
 
 const Title = styled.h1`
   font-size: 24px;
@@ -52,6 +60,7 @@ const Input = styled.input`
 const Agreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
+  color:black;
 `;
 
 const Button = styled.button`
@@ -69,6 +78,7 @@ const SuccessMessage = styled.div`
   color: green;
 `;
 
+
 const Login = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -76,6 +86,7 @@ const Login = () => {
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [progress, setProgress] = useState(0); // Track progress
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,6 +103,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Show loading spinner
+
     try {
       const response = await fetch("http://localhost:8080/Customer/login", {
         method: "POST",
@@ -100,37 +113,30 @@ const Login = () => {
         },
         body: JSON.stringify(formData),
       });
+
       if (response.status === 200) {
-        setSuccessMessage( <h1>Login successfully</h1>);
+        setSuccessMessage(<h1>Login successfully</h1>);
         // Clear the success message after a certain time (e.g., 3 seconds)
         setTimeout(() => setSuccessMessage(""), 3000);
-        window.location.href = "http://localhost:3000/"; 
-        // You can also redirect to a success page here
-      }
-      else if (response.status === 202) {
-        setSuccessMessage( <h1>User Not Found</h1>);
+        window.location.href = "http://localhost:3000/";
+      } else {
+        if (response.status === 202) {
+          setSuccessMessage(<h1>User Not Found</h1>);
+        } else if (response.status === 400) {
+          setSuccessMessage(<h1>Password is Wrong</h1>);
+        } else {
+          setSuccessMessage(<h1>BACKEND IS NOT ALIVE</h1>);
+        }
         // Clear the success message after a certain time (e.g., 3 seconds)
         setTimeout(() => setSuccessMessage(""), 3000);
-        // You can also redirect to a success page here
-      }
-      else if (response.status === 400) {
-        setSuccessMessage( <h1>password its Wrong</h1>);
-        // Clear the success message after a certain time (e.g., 3 seconds)
-        setTimeout(() => setSuccessMessage(""), 3000);
-        // You can also redirect to a success page here
-      }
-       else {
-        setSuccessMessage( <h1>BACKEND IS NOT ALIVE</h1>);
-        // Clear the success message after a certain time (e.g., 3 seconds)
-        setTimeout(() => setSuccessMessage(""), 3000);
-        // Handle the case where the request was not successful (e.g., show an error message)
       }
     } catch (error) {
-      setSuccessMessage( <h1>BACKEND IS NOT ALIVE</h1>);
-      // Clear the success message after a certain time (e.g., 3 seconds)
-      setTimeout(() => setSuccessMessage(""), 3000);
+      setSuccessMessage(<h1>BACKEND IS NOT ALIVE</h1>);
+    } finally {
+      setLoading(false); // Hide loading spinner
     }
   };
+
 
   return (
     <Container>
@@ -154,11 +160,25 @@ const Login = () => {
             value={formData.password}
             onChange={handleInputChange}
           />
+        {loading ? ( // Display the spinner if loading is true
+            <SpinnerContainer>
+              <RotatingLines
+                strokeColor="blue"
+                strokeWidth="7"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+              />
+            </SpinnerContainer>
+          ) : (
+            <Button type="submit">LOGIN</Button>
+          )}
+
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button type="submit">LOGIN</Button>
+       
         
         </Form>
       </Wrapper>

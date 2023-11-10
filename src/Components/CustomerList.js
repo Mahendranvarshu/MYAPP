@@ -4,18 +4,24 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 60vh;
  
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  ),
+  url("https://c8.alamy.com/comp/KXDA03/devices-top-view-3d-rendering-KXDA03.jpg")
+  center;
   background-size: cover;
   display: flex;
   align-items: top;
   justify-content: center;
   flex: 1;
   z-index: 999;
-  min-width: 280px;
+  min-width: 28px;
   display: flex;
   justify-content: center;
-  background-color: #fcf5f5;
+
   position: relative;
   padding: 20px;
 `;

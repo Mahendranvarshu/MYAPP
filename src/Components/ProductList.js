@@ -32,6 +32,7 @@
       height: 350px;
       display: flex;
       align-items: center;
+      
       justify-content: center;
       background-color: linear-gradient(45deg, #FF5733, #0052D4); /* Change the background color to white */
       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2); /* Add box shadow for a card effect */

@@ -13,7 +13,14 @@ import { mobile } from "../responsive";
 import Productcatelog from "../Components/Productcatelog";
 
 const Container = styled.div`
-background-color: #fcf5f5`;
+
+background: linear-gradient(
+  rgba(184, 231, 219, 0.9),
+  rgba(184, 231, 219, 1)
+),
+url("https://c8.alamy.com/comp/KXDA03/devices-top-view-3d-rendering-KXDA03.jpg")
+center;
+`;
 
 const Title = styled.h1`
   margin: 20px;
@@ -58,6 +65,7 @@ const ProductList = () => {
     password: "",
   });
 
+  
   const [showLogin, setShowLogin] = useState(false); // State to control the display of the Login component
 
   const [showError, setShowError] = useState(true);
@@ -86,7 +94,7 @@ const ProductList = () => {
         setCustomer(data); // Update the state with the fetched data
       })
       .catch((error) => {
-        
+              
         
        
       });
@@ -103,11 +111,12 @@ const ProductList = () => {
    
     
     <Container >
-        <div className="text-moving-animation">
-      <p >Super Deal! Free Shipping on Orders Over $50</p>
-    </div>
+        
        {showLogin && <Login />}
        {showError && <Error />}
+       <div className="text-moving-animation">
+      <p >Super Deal! Free Shipping on Orders Over $50</p>
+    </div>
       
      
       <Title>Hi  {customer.name}</Title>

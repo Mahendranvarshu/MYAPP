@@ -7,17 +7,20 @@ const Container = styled.div`
   background-color: #fcf5f5;
   display: flex;
   align-items: center;
-  justify-content: center;
+  background: linear-gradient(rgba(255, 255, 255, 04), rgba(255, 255, 255, 0)),
+  url("https://cdn.dribbble.com/users/3713179/screenshots/9536384/media/ed9f05d7ed5b92878712ced805e97a54.png?compress=1&resize=1000x750");
+   justify-content: center;
   flex-direction: column;
 `;
 const Title = styled.h1`
   font-size: 70px;
+  color:black;
   margin-bottom: 20px;
 `;
 
 const Desc = styled.div`
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 29px;
+  font-weight: 600;
   margin-bottom: 20px;
   ${mobile({ textAlign: "center" })}
 
