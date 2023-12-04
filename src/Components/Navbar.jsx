@@ -19,38 +19,27 @@ const Container = styled.div`
   padding: 15px 0; /* Increased padding to raise the Navbar height */
 `;
 const Container2 = styled.div`
-  background: linear-gradient(15deg, #FF5733, #0052D4); /* Blue background */
-  color: #fff; /* White text color */
-  box-shadow: 5px 5px 10px rgba(0, 82, 212, 0.7); /* Fixed the shadow property */
-  padding: 10px 0; /* Increased padding to raise the Navbar height */
-  border-radius: 10px; /* Add rounded corners with a specific radius */
+  background: linear-gradient(15deg, #FF5733, #0052D4);
+  color: #fff;
+  box-shadow: 5px 5px 10px rgba(0, 82, 212, 0.7);
+  padding: 10px 20px;
+  border-radius: 10px;
+  ${mobile({ padding: "10px" })}
 `;
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-
-  ${mobile({ padding: "10px 0" })}
-`;
-
-const Left = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Language = styled.span`
-  font-size: 14px;
-  cursor: pointer;
-
-  ${mobile({ display: "none" })}
+  padding: 10px 20px;
+  ${mobile({ flexDirection: "column", padding: "10px" })}
 `;
 
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   display: flex;
   align-items: center;
-  margin-left: 25px;
+  margin-top: 10px; /* Adjusted margin for better spacing on mobile */
   padding: 5px;
 `;
 
@@ -60,53 +49,60 @@ const Input = styled.input`
   color: #111;
   background: transparent;
   font-size: 14px;
-  width: 120px;
+  width: 100%; /* Adjusted width for better responsiveness */
+  ${mobile({ width: "80%" })}
+`;
 
-  ${mobile({ width: "50px" })}
+const Left = styled.div`
+  display: flex;
+  align-items: center;
+  ${mobile({ flexDirection: "column", alignItems: "center" })}
 `;
 
 const Center = styled.div`
   flex: 1;
   text-align: center;
-`;
-
-const Logo = styled.h1`
-  font-weight: bold;
-  font-size: 32px; /* Increased font size for better visibility */
-  color: white; /* A specific color for the logo */
-   /* Convert text to uppercase */
-  letter-spacing: 4px; /* Add letter spacing for a more stylish look */
-  margin: 5; /* Remove any default margins */
-  padding: 0px; /* Add some padding for spacing */
-  /* Add an underline with a different color */
-  text-shadow: 4px 4px 0 #000, 8px 8px 0 #ff5733; /* Create a 3D text effect with text-shadow */
-  transition: transform 0.2s ease-in-out; /* Add a transition effect */
-
-  &:hover {
-    transform: scale(1.1); /* Scale the text when hovered */
-  }
+  ${mobile({ marginTop: "10px" })}
 `;
 
 const Right = styled.div`
   display: flex;
   align-items: center;
+  ${mobile({ marginTop: "10px", justifyContent: "center" })}
 `;
-const LogoImage = styled.img`
-  width: 70px; /* Set the width and height as per your preference */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Add some margin to separate the logo from other elements */
-  
-  `;
-
 
 const MenuItem = styled.div`
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 12px;
-  text-transform: uppercase; /* Make text uppercase */
+  margin: 5px; /* Adjusted margin for better spacing on mobile */
+  text-transform: uppercase;
+  ${mobile({ fontSize: "12px", margin: "5px" })}
+`;
 
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+const LogoImage = styled.img`
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+  ${mobile({ width: "50px", height: "auto" })}
+`;
+
+const Logo = styled.h1`
+  font-weight: bold;
+  font-size: 24px;
+  color: white;
+  letter-spacing: 2px;
+  margin: 5px;
+  padding: 0px;
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #ff5733;
+  transition: transform 0.2s ease-in-out;
+  ${mobile({ fontSize: "20px" })}
+`;
+const Language = styled.span`
+  font-size: 14px;
+  cursor: pointer;
+
+  ${mobile({ display: "none" })}
 `;
 
 const Navbar = () => {
@@ -136,10 +132,6 @@ const Navbar = () => {
           <Logo>MahiShop.in</Logo>
         </Center>
         <Right>
-          <MenuItem onClick={() => openPopup('CustomerForm')}>CustomerForm</MenuItem>
-          <MenuItem onClick={() => openPopup('ProductForm')}>ProductForm</MenuItem>
-          <MenuItem onClick={() => openPopup('ProductList')}>ProductList</MenuItem>
-          <MenuItem onClick={() => openPopup('Customerdetails')}>CustomerDetails</MenuItem>
           <MenuItem onClick={() => openPopup('Register')}>REGISTER</MenuItem>
           <MenuItem onClick={() => openPopup('signup')}>SIGN IN</MenuItem>
           <MenuItem onClick={() => openPopup('Shopcart')}>

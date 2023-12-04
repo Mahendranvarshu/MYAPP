@@ -45,7 +45,7 @@ const ProductListview = ({ onClose }) => {
 
   useEffect(() => {
     // Fetch data from your Spring Boot API
-    fetch('http://localhost:8080/Product/getAll') // Replace with your API endpoint
+    fetch('http://18.183.156.88:8080/Product/getAll') // Replace with your API endpoint
       .then((response) => response.json())
       .then((data) => {
         setProducts(data); // Update the state with the fetched data
@@ -57,7 +57,7 @@ const ProductListview = ({ onClose }) => {
 
   const handleDeleteProduct = (product_ID) => {
     // Make an HTTP request to delete the product with the specified ID
-    fetch(`http://localhost:8080/Product/delete/${product_ID}`, {
+    fetch(`http://18.183.156.88:8080/Product/delete/${product_ID}`, {
       method: 'DELETE',
     })
       .then(() => {

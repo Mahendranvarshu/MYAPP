@@ -109,7 +109,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/Customer/register", {
+      const response = await fetch("http://18.183.156.88:8080/Customer/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +127,7 @@ const Register = () => {
         setSuccessMessage( <h1>Customer created successfully</h1>);
         // Clear the success message after a certain time (e.g., 3 seconds)
         setTimeout(() => setSuccessMessage(""), 3000);
-        window.location.href = "http://localhost:3000/"; 
+        window.location.reload();
         // You can also redirect to a success page here
       }else {
         // Handle the case where the request was not successful (e.g., show an error message)

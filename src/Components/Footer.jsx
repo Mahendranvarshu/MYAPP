@@ -20,6 +20,7 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  ${mobile({ padding: "20px 10px" })}
 `;
 
 const Logo = styled.h1``;
@@ -70,8 +71,7 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
-  ${mobile({ backgroundColor: "#fff8f8" })}
-
+  ${mobile({ backgroundColor: "#fff8f8", padding: "20px 10px" })}
 `;
 
 const ContactItem = styled.div`

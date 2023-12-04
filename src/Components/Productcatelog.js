@@ -16,7 +16,7 @@ function Productcatelog() {
 
   useEffect(() => {
     // Fetch product data from your API
-    fetch("http://localhost:8080/Product/getAll")
+    fetch("http://18.183.156.88:8080/Product/getAll")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching data:", error));

@@ -41,7 +41,7 @@ const CustomerList = ({ onClose }) => {
 
   useEffect(() => {
     // Fetch data from your Spring Boot API
-    fetch('http://localhost:8080/Customer/getAll') // Replace with your API endpoint
+    fetch('http://18.183.156.88:8080/Customer/getAll') // Replace with your API endpoint
       .then((response) => response.json())
       .then((data) => {
         setCustomers(data); // Update the state with the fetched data
@@ -53,7 +53,7 @@ const CustomerList = ({ onClose }) => {
 
   const handleDeleteCustomer = (customerId) => {
     // Make an HTTP request to delete the customer with the specified ID
-    fetch(`http://localhost:8080/Customer/delete/${customerId}`, {
+    fetch(`http://18.183.156.88:8080/Customer/delete/${customerId}`, {
       method: 'DELETE',
     })
       .then(() => {

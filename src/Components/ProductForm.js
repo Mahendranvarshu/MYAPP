@@ -85,7 +85,7 @@ function ProductForm() {
     formData.append('file', File);
     formData.append('product', JSON.stringify(product));
 
-    fetch('http://localhost:8080/Product/create', {
+    fetch('http://18.183.156.88:8080/Product/create', {
       method: 'POST',
       body: formData,
       headers: {

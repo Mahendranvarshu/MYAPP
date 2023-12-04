@@ -223,7 +223,7 @@ const Button = styled.button`
       setLoading(true);
       alert('Order Confirm');
       // Send a DELETE request to your server to remove the product from the cart
-      fetch(`http://localhost:8080/Order/Bookorder/${price}`, {
+      fetch(`http://18.183.156.88:8080/Order/Bookorder/${price}`, {
         method: 'POST',
       })
         .then((response) => {
@@ -255,7 +255,7 @@ const Button = styled.button`
 const removeProduct = (productId) => {
   alert('Are you sure');
   // Send a DELETE request to your server to remove the product from the cart
-  fetch(`http://localhost:8080/Order/removeFromCart/${productId}`, {
+  fetch(`http://18.183.156.88:8080/Order/removeFromCart/${productId}`, {
     method: 'DELETE',
   })
     .then((response) => {
@@ -277,7 +277,7 @@ const removeProduct = (productId) => {
   
     useEffect(() => {
       // Fetch product data from your API
-      fetch("http://localhost:8080/Order/getcartP")
+      fetch("http://18.183.156.88:8080/Order/getcartP")
         .then((response) => response.json())
         .then((data) => setProducts(data))
         .catch((error) => console.error("Error fetching data:", error));

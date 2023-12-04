@@ -106,7 +106,7 @@ const Login = () => {
     setLoading(true); // Show loading spinner
 
     try {
-      const response = await fetch("http://localhost:8080/Customer/login", {
+      const response = await fetch("http://18.183.156.88:8080/Customer/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +118,7 @@ const Login = () => {
         setSuccessMessage(<h1>Login successfully</h1>);
         // Clear the success message after a certain time (e.g., 3 seconds)
         setTimeout(() => setSuccessMessage(""), 3000);
-        window.location.href = "http://localhost:3000/";
+        window.location.reload();
       } else {
         if (response.status === 202) {
           setSuccessMessage(<h1>User Not Found</h1>);
