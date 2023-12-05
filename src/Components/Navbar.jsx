@@ -129,11 +129,15 @@ const Navbar = () => {
         </Left>
         <Center>
         <LogoImage src={logo} />
-          <Logo>MahiShop.in</Logo>
+          <Logo>MahiShop.in💖</Logo>
         </Center>
         <Right>
-          <MenuItem onClick={() => openPopup('Register')}>REGISTER</MenuItem>
-          <MenuItem onClick={() => openPopup('signup')}>SIGN IN</MenuItem>
+          <MenuItem onClick={() => openPopup('CustomerForm')}>CustomerForm</MenuItem>
+          <MenuItem onClick={() => openPopup('ProductForm')}>ProductForm</MenuItem>
+          <MenuItem onClick={() => openPopup('ProductList')}>ProductList</MenuItem>
+          <MenuItem onClick={() => openPopup('Customerdetails')}>CustomerDetails</MenuItem>
+          <MenuItem onClick={() => openPopup('Register')}>💖REGISTER💖</MenuItem>
+          <MenuItem onClick={() => openPopup('signup')}>💖SIGN IN💖</MenuItem>
           <MenuItem onClick={() => openPopup('Shopcart')}>
             <Badge badgeContent={4} color="primary">
               <ShoppingCartOutlined />

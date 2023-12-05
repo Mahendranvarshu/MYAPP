@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { ProgressBar } from "react-bootstrap";
 
+import { RotatingLines } from "react-loader-spinner";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -16,6 +18,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 `;
 
 const Wrapper = styled.div`
@@ -72,6 +80,7 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [progress, setProgress] = useState(0); // Track progress
 
@@ -108,6 +117,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch("http://18.183.156.88:8080/Customer/register", {
         method: "POST",
@@ -127,7 +137,7 @@ const Register = () => {
         setSuccessMessage( <h1>Customer created successfully</h1>);
         // Clear the success message after a certain time (e.g., 3 seconds)
         setTimeout(() => setSuccessMessage(""), 3000);
-        window.location.reload();
+        window.location.reload(); 
         // You can also redirect to a success page here
       }else {
         // Handle the case where the request was not successful (e.g., show an error message)
@@ -135,6 +145,9 @@ const Register = () => {
     } catch (error) {
       console.error("An error occurred while creating the customer: ", error);
     }
+  finally {
+    setLoading(false); // Hide loading spinner
+  }
   };
 
   return (
@@ -186,12 +199,24 @@ const Register = () => {
             value={formData.password}
             onChange={handleInputChange}
           />
+          {loading ? ( // Display the spinner if loading is true
+            <SpinnerContainer>
+              <RotatingLines
+                strokeColor="blue"
+                strokeWidth="7"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+              />
+            </SpinnerContainer>
+          ) : (
+            <Button type="submit">SIGN IN</Button>
+          )}
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button type="submit">CREATE</Button>
-        
+          
         </Form>
       </Wrapper>
     </Container>

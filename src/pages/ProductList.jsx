@@ -12,6 +12,7 @@ import Newsletter from "../Components/Newsletter";
 import { mobile } from "../responsive";
 import Productcatelog from "../Components/Productcatelog";
 
+
 const Container = styled.div`
 
 background: linear-gradient(
@@ -115,7 +116,7 @@ const ProductList = () => {
        {showLogin && <Login />}
        {showError && <Error />}
        <div className="text-moving-animation">
-      <p >Super Deal! Free Shipping on Orders Over $50</p>
+      <p style={{ color: "blue" }}>🚶🚶🎉 🥳 Super Deal! Free Shipping on Orders Over $50 🥳 🎉</p>
     </div>
       
      

@@ -3,15 +3,15 @@
   overflow: visible;
   position: relative;
   animation: moveLeftToRight 10s linear infinite;
-  color: transparent;
+  color: linear-gradient(45deg, #4400ff, #ff0000);;;
   text-align: center;
   font-size: 30px;
   text-shadow: 6px 6px 8px rgba(32, 71, 227, 0.5);
   font-weight: bold;
-  background: linear-gradient(45deg, #ffcc00, #ff00cc);
+
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
+
   transition: transform 0.2s ease-in-out;
 }
 

@@ -260,7 +260,8 @@ const removeProduct = (productId) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        // Product removed successfully, update the UI
+        // Product removed successfully, update the 
+        
           const updatedProducts = products.filter(
             (product) => product.product_ID !== productId
           );
