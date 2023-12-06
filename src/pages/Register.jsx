@@ -119,7 +119,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://18.183.156.88:8080/Customer/register", {
+      const response = await fetch("http://43.207.42.133:8080/Customer/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

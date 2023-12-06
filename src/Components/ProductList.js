@@ -68,7 +68,7 @@
         productid: productid, // Pass the productid from the parameter
       };
 
-      const response = await fetch("http://18.183.156.88:8080/Order/addcart", {
+      const response = await fetch("http://43.207.42.133:8080/Order/addcart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

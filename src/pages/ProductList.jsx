@@ -75,7 +75,7 @@ const ProductList = () => {
   useEffect(() => {
  
     // Fetch data from your Spring Boot API
-    fetch('http://18.183.156.88:8080/Customer/get') // Replace with your API endpoint
+    fetch('http://43.207.42.133:8080/Customer/get') // Replace with your API endpoint
       .then((response) => {
         
         if (response.ok) {

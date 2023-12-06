@@ -57,7 +57,7 @@ const ProductListview = ({ onClose }) => {
 
   const handleDeleteProduct = (product_ID) => {
     // Make an HTTP request to delete the product with the specified ID
-    fetch(`http://18.183.156.88:8080/Product/delete/${product_ID}`, {
+    fetch(`http://43.207.42.133:8080/Product/delete/${product_ID}`, {
       method: 'DELETE',
     })
       .then(() => {
