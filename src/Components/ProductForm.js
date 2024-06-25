@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { RotatingLines } from "react-loader-spinner";
 import {
   TextField,
   Button,
@@ -13,6 +13,7 @@ import {
 
 import { mobile } from "../responsive";
 import styled from "styled-components";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -31,6 +32,12 @@ const Container = styled.div`
   background-color: #fcf5f5;
   position: relative;
   padding: 20px;
+`;
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 `;
 
 const Wrapper = styled.div`
@@ -56,14 +63,15 @@ function ProductForm() {
 
   
   const [product, setProduct] = useState({
-    product_name: '',
-    brand_name: '',
+    productName: '',
+    brandName: '',
     price: '',
     category: '',
-    stack: '',
-    warenty: '',
-    offerEnd_date: '',
+    stock: '',
+    warranty: '',
+    offerEndDate: '',
   });
+  const [loading, setLoading] = useState(false);
   const [File, setFile] = useState(null);
 
   const classes = useStyles();
@@ -78,14 +86,16 @@ function ProductForm() {
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
-
+   
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
     const formData = new FormData();
     formData.append('file', File);
     formData.append('product', JSON.stringify(product));
-
-    fetch('http://43.207.42.133:8080/Product/create', {
+    try{
+      setLoading(true);
+    fetch('https://mahishop-app.onrender.com/Product/create', {
       method: 'POST',
       body: formData,
       headers: {
@@ -100,7 +110,12 @@ function ProductForm() {
       .catch((error) => {
         console.error('Error:', error);
       });
+    }
+    finally{
+      setLoading(false);
+    }
   };
+
 
   return (
     <Container>
@@ -113,19 +128,19 @@ function ProductForm() {
           <Grid container spacing={3}>
             <Grid item xs={6}>
               <TextField
-                name="product_name"
+                name="productName"
                 label="Product Name"
                 fullWidth
-                value={product.product_name}
+                value={product.productName}
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
-                name="brand_name"
+                name="brandName"
                 label="Brand Name"
                 fullWidth
-                value={product.brand_name}
+                value={product.brandName}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -150,31 +165,31 @@ function ProductForm() {
             </Grid>
             <Grid item xs={6}>
               <TextField
-                name="stack"
+                name="stock"
                 label="Stack"
                 fullWidth
                 type="number"
-                value={product.stack}
+                value={product.stock}
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
-                name="warenty"
+                name="warranty"
                 label="Warranty"
                 fullWidth
                 type="number"
-                value={product.warenty}
+                value={product.warranty}
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                name="offerEnd_date"
+                name="offerEndDate"
                 label="Offer End Date"
                 fullWidth
                 type="text"
-                value={product.offerEnd_date}
+                value={product.offerEndDate}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -188,7 +203,18 @@ function ProductForm() {
               />
             </Grid>
           </Grid>
-          <Button
+          {loading ? ( // Display the spinner if loading is true
+            <SpinnerContainer>
+              <RotatingLines
+                strokeColor="blue"
+                strokeWidth="7"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+              />
+            </SpinnerContainer>
+          ) : (
+            <Button
             type="submit"
             variant="contained"
             color="primary"
@@ -196,6 +222,8 @@ function ProductForm() {
           >
             Add Product
           </Button>
+          )}
+          
         </form>
       </Paper>
     

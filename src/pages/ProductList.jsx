@@ -58,7 +58,7 @@ const ProductList = () => {
 
   
   const [customer, setCustomer] = useState({
-    name: "",
+    username: "",
     lastname: "",
     phone_no: "",
     address: "",
@@ -75,7 +75,7 @@ const ProductList = () => {
   useEffect(() => {
  
     // Fetch data from your Spring Boot API
-    fetch('http://43.207.42.133:8080/Customer/get') // Replace with your API endpoint
+    fetch('https://mahishop-app.onrender.com/Customer/get') // Replace with your API endpoint
       .then((response) => {
         
         if (response.ok) {
@@ -116,11 +116,12 @@ const ProductList = () => {
        {showLogin && <Login />}
        {showError && <Error />}
        <div className="text-moving-animation">
-      <p style={{ color: "blue" }}>🚶🚶🎉 🥳 Super Deal! Free Shipping on Orders Over $50 🥳 🎉</p>
+      <p style={{ color: "blue" }}>🎉🥳🎆 Wishing all my friends a Happy New Year 2024! 🎇🌟🥂
+</p>
     </div>
       
      
-      <Title>Hi  {customer.name}</Title>
+      <Title>Hi  {customer.username}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
@@ -130,9 +131,9 @@ const ProductList = () => {
             </Option>
             <Option>Smarphone</Option>
             <Option>Labtop</Option>
-            <Option>Taplet</Option>
+            <Option>Tablet</Option>
             <Option>Smart watches</Option>
-            <Option>earsBuds</Option>
+            <Option>earBuds</Option>
             
           </Select>
           <Select>

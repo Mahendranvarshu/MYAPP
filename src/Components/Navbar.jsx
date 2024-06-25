@@ -1,6 +1,7 @@
 import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import CustomerForm from "./CustomerForm";
@@ -116,6 +117,19 @@ const Navbar = () => {
     setSelectedMenuItem(null);
   };
 
+  const [totalCartItems, setTotalCartItems] = useState(0);
+
+  
+    axios.get('https://mahishop-app.onrender.com/Order/totalcart')
+      .then(response => {
+        setTotalCartItems(response.data); // Assuming the response contains the total count
+      })
+      .catch(error => {
+        console.error('Error fetching total cart items:', error);
+      });
+
+
+
   return (
     <Container>
       <Container2>
@@ -132,14 +146,14 @@ const Navbar = () => {
           <Logo>MahiShop.in💖</Logo>
         </Center>
         <Right>
-          <MenuItem onClick={() => openPopup('CustomerForm')}>CustomerForm</MenuItem>
+          <MenuItem onClick={() => openPopup('CustomerForm')}>Order Details</MenuItem>
           <MenuItem onClick={() => openPopup('ProductForm')}>ProductForm</MenuItem>
           <MenuItem onClick={() => openPopup('ProductList')}>ProductList</MenuItem>
           <MenuItem onClick={() => openPopup('Customerdetails')}>CustomerDetails</MenuItem>
           <MenuItem onClick={() => openPopup('Register')}>💖REGISTER💖</MenuItem>
           <MenuItem onClick={() => openPopup('signup')}>💖SIGN IN💖</MenuItem>
           <MenuItem onClick={() => openPopup('Shopcart')}>
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={totalCartItems} color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>

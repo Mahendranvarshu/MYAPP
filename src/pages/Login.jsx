@@ -81,7 +81,7 @@ const SuccessMessage = styled.div`
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    email: "",
     password: "",
   });
   const [successMessage, setSuccessMessage] = useState("");
@@ -106,7 +106,7 @@ const Login = () => {
     setLoading(true); // Show loading spinner
 
     try {
-      const response = await fetch("http://43.207.42.133:8080/Customer/login", {
+      const response = await fetch("https://mahishop-app.onrender.com/Customer/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -146,10 +146,10 @@ const Login = () => {
         <ProgressBar progress={progress} /> {/* Progress bar component */}
         <Form onSubmit={handleSubmit}>
           <Input
-            type="text"
-            name="name"
-            placeholder="name"
-            value={formData.name}
+            type="mail"
+            name="email"
+            placeholder="EMail"
+            value={formData.email}
             onChange={handleInputChange}
           />
           

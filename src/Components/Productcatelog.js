@@ -6,7 +6,7 @@ function Productcatelog() {
 
   useEffect(() => {
     // Fetch product data from your API
-    fetch("http://43.207.42.133:8080/Product/getAll")
+    fetch("https://mahishop-app.onrender.com/Product/getAll")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching data:", error));

@@ -5,15 +5,11 @@ import { ProgressBar } from "react-bootstrap";
 
 import { RotatingLines } from "react-loader-spinner";
 
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0.5)
-  ),
-  url("https://mlgutqw7cla3.i.optimole.com/aRCVEKc-F4JO4oiL/w:auto/h:auto/q:auto/https://layer8security.com.au/wp-content/uploads/2020/05/smartphones-mobile-devices.jpg")
-  center;
+  
   background-size: cover;
   display: flex;
   align-items: center;
@@ -25,12 +21,22 @@ const SpinnerContainer = styled.div`
   align-items: center;
   margin-top: 20px;
 `;
+const CloseButton = styled.button`
+position: absolute;
+top: 10px;
+left: 10px;
+background: transparent;
+border: none;
+color: black;
+font-size: 20px;
+cursor: pointer;
+`;
 
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   
-  background-color: white;
+  background-color: black;
   ${mobile({ width: "75%" })}
 `;
 
@@ -59,11 +65,12 @@ const Agreement = styled.span`
 const Button = styled.button`
   width: 40%;
   border: none;
-  padding: 15px 20px;
+  padding: 20px;
   background-color: teal;
   color: white;
   cursor: pointer;
 `;
+
 
 const SuccessMessage = styled.div`
   width: 100%;
@@ -71,9 +78,9 @@ const SuccessMessage = styled.div`
   color: green;
 `;
 
-const Register = () => {
+const Register =({ onClose }) => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     lastname: "",
     phone_no: "",
     address: "",
@@ -119,7 +126,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://43.207.42.133:8080/Customer/register", {
+      const response = await fetch("https://mahishop-app.onrender.com/Customer/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -149,19 +156,32 @@ const Register = () => {
     setLoading(false); // Hide loading spinner
   }
   };
-
+  const handleClose = () => {
+    // Logic to close the component goes here
+    onClose();
+  };
+ 
   return (
     <Container>
       <Wrapper>
+        <div >
+        <CloseButton onClick={handleClose}>
+           ❌ <h2>close</h2>      
+        </CloseButton>
+        </div>
+      
         <Title>CREATE AN ACCOUNT</Title>
+        
         {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
         <ProgressBar progress={progress} /> {/* Progress bar component */}
+        
         <Form onSubmit={handleSubmit}>
+      
           <Input
             type="text"
-            name="name"
-            placeholder="name"
-            value={formData.name}
+            name="username"
+            placeholder="UserName"
+            value={formData.username}
             onChange={handleInputChange}
           />
           <Input
@@ -199,6 +219,7 @@ const Register = () => {
             value={formData.password}
             onChange={handleInputChange}
           />
+        
           {loading ? ( // Display the spinner if loading is true
             <SpinnerContainer>
               <RotatingLines

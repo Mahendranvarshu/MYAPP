@@ -1,163 +1,175 @@
-import React, { useState} from "react";
-import styled from "styled-components";
-import { mobile } from "../responsive";
-import { ProgressBar } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0.5)
-  ),
-    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
-      center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: black;
+  border: 2px solid #c2e8f3;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.6);
+  transition: right 0.3s ease-in-out;
   flex: 1;
-  z-index: 999;
   min-width: 280px;
   display: flex;
+  z-index: 999;
   justify-content: center;
-  background-color: #f5fbfd;
   position: relative;
-  padding: 20px;
-`;
-
-const Wrapper = styled.div`
-  width: 25%;
-  padding: 20px;
-  background-color: white;
-  ${mobile({ width: "75%" })}
-`;
-
-const Title = styled.h1`
-  font-size: 24px;
-  font-weight: 300;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Input = styled.input`
-  flex: 1;
-  min-width: 40%;
-  margin: 20px 10px 0px 0px;
-  padding: 10px;
-`;
-
-const Agreement = styled.span`
-  font-size: 12px;
-  margin: 20px 0px;
-`;
-
-const Button = styled.button`
-  width: 40%;
-  border: none;
-  padding: 15px 20px;
-  background-color: teal;
+  padding: 40px;
   color: white;
+`;
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+const ProductTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f5f5f5;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
   cursor: pointer;
 `;
 
-const SuccessMessage = styled.div`
-  width: 100%;
-  text-align: center;
-  color: green;
+const CancelButton = styled.button`
+  margin-top: 20px;
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 `;
 
-const Register = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    password: "",
-  });
-  const [successMessage, setSuccessMessage] = useState("");
-  const [progress, setProgress] = useState(0); // Track progress
+const CustomerDetails = ({ onClose }) => {
+  const [customerData, setCustomerData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+ 
+  
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        
+        const response = await fetch('https://mahishop-app.onrender.com/OrderManage/getOrderDetails'); // Replace with your API endpoint
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setCustomerData(data);
+      } catch (error) {
+        setError('Orders is Empty. Please order again.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // Calculate progress based on the number of completed fields
-    const fields = Object.values(formData).filter(Boolean);
-    const newProgress = (fields.length / Object.keys(formData).length) * 100;
-    setProgress(newProgress);
-  };
+    fetchData();
+  }, []); // Empty dependency array to run only once on mount
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://43.207.42.133:8080/Customer/login", {
-        method: "POST",
+  
+  const handleCancelOrder = async (orderid) => {
+    try {setLoading(true);
+      alert('Are you sure to cancel the order');
+      // Perform cancellation logic here, e.g., interacting with your API
+      const response = await fetch(`https://mahishop-app.onrender.com/OrderManage/cancelorder/${orderid}`, {
+        method: 'DELETE', // Corrected method to DELETE
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
       });
-      if (response.status === 200) {
-        setSuccessMessage( <h1>Login successfully</h1>);
-        // Clear the success message after a certain time (e.g., 3 seconds)
-        setTimeout(() => setSuccessMessage(""), 3000);
-        // You can also redirect to a success page here
+      
+
+      if (!response.ok) {
+        throw new Error('Failed to cancel order');
       }
-      else if (response.status === 202) {
-        setSuccessMessage( <h1>User Not Found</h1>);
-        // Clear the success message after a certain time (e.g., 3 seconds)
-        setTimeout(() => setSuccessMessage(""), 3000);
-        // You can also redirect to a success page here
-      }
-      else if (response.status === 400) {
-        setSuccessMessage( <h1>password its Wrong</h1>);
-        // Clear the success message after a certain time (e.g., 3 seconds)
-        setTimeout(() => setSuccessMessage(""), 3000);
-        // You can also redirect to a success page here
-      }
-       else {
-        // Handle the case where the request was not successful (e.g., show an error message)
-      }
+
+      // Handle cancellation success - you might want to update the UI or take further actions
+      console.log('Order canceled successfully');
+      
     } catch (error) {
-      console.error("An error occurred while login the customer: ", error);
+      setError('Orders is Empty. Please order again ');
+      // Handle error state or display an error message to the user
     }
+    
   };
+
+  const handleClose = () => {
+    // Logic to close the component goes here
+    onClose();
+  };
+
+
+  if (error) return <Container>Error: {error}</Container>;
+  if (!customerData) return <Container>No customer details available</Container>;
 
   return (
     <Container>
-      <Wrapper>
-        <Title>LOGIN AN ACCOUNT</Title>
-        {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
-        <ProgressBar progress={progress} /> {/* Progress bar component */}
-        <Form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            name="name"
-            placeholder="name"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-          
-          <Input
-            type="password"
-            name="password"
-            placeholder="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-          <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
-          <Button type="submit">LOGIN</Button>
-        
-        </Form>
-      </Wrapper>
+      <CloseButton onClick={handleClose}>❌</CloseButton>
+      <div className="customer-details-container">
+        <h1>Order Details</h1>
+        <p><strong>🆔 ID:</strong> {customerData.id}</p>
+      <p><strong>👤 Name:</strong> {customerData.customerName}</p>
+      <p><strong>🏠 Address:</strong> {customerData.customerAddress}</p>
+      <p><strong>☎️ Phone:</strong> {customerData.customerPhone}</p>
+      <p><strong>💵 Order Cost:</strong> ${customerData.orderCost}</p>
+      <p><strong>📅 Delivery Date:</strong> {customerData.delivery}</p>
+      <p><strong>📅 Booking Date:</strong> {customerData.bookingDate}</p>
+
+        {/* ... (other customer details) */}
+
+        <div className="product-list">
+          <h2>🛍️ Products</h2>
+          <ProductTable>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customerData.listOfProduct.map((product, index) => (
+                <tr key={index}>
+                  <td>{product.productName}</td>
+                  <td>{product.brandName}</td>
+                  <td>${product.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </ProductTable>
+        </div>
+        {loading ? ( // Display the spinner if loading is true
+            <SpinnerContainer>
+              <h1>Order is cancelled</h1>
+             
+            </SpinnerContainer>
+          ) : (
+            <CancelButton onClick={() => handleCancelOrder(customerData.id)}>Cancel Order</CancelButton>
+
+          )}
+       
+   </div>
     </Container>
   );
 };
 
-export default Register;
+export default CustomerDetails;

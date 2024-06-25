@@ -28,7 +28,7 @@
     const Container = styled.div`
       flex: 1;
       margin: 5px;
-      min-width: 280px;
+      min-width: 180px;
       height: 350px;
       display: flex;
       align-items: center;
@@ -68,7 +68,7 @@
         productid: productid, // Pass the productid from the parameter
       };
 
-      const response = await fetch("http://43.207.42.133:8080/Order/addcart", {
+      const response = await fetch("https://mahishop-app.onrender.com/Order/addcart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,19 +90,27 @@
         <h1>Product List</h1>
         <div className="row">
           {products.map((product) => (
-            <div className="col-md-4 mb-4" key={product.product_ID}>
-              <div className="card" style={{boxShadow: '4px 7px 15px red' }}>
+            <div className="col-md-4 mb-4" key={product.id}>
+              <div className="card" style={{boxShadow: '4px 7px 15px gold' }}>
                 <Container>
-                  <div className="card-body" style={{ backgroundImage: `url(data:image/png;base64,${product.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    <h5 className="card-title" style={{ color: 'white',  background: 'linear-gradient(45deg, #FF5733, #0052D4)', padding: '5px', borderRadius: '6px',boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.4)' , width: `${product.product_name.length+2}ch`}}>{product.product_name}</h5>
-                    <h6 className="card-text"  style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '6px',boxShadow: '5px 5px 10px rgba(244, 53, 10, 0.7)' , width: `${product.brand_name.length+2}ch`}}>  {product.brand_name}</h6>
+                  <div className="card-body" 
+                  style={{
+                    backgroundImage: `url(data:image/png;base64,${product.image})`,
+                    backgroundSize: '370px 370px', // ensure the entire image is visible
+                    backgroundPosition: 'center', // center the image
+                    backgroundRepeat: 'no-repeat', // prevent the image from repeating
+                    width: '300px', // set a fixed width
+                    height: '270px' // set a fixed height
+                  }}>
+                      <h5 className="card-title" style={{ color: 'white',  background: 'linear-gradient(45deg, #FF5733, #0052D4)', padding: '5px', borderRadius: '6px',boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.4)' , width: `${product.productName.length+2}ch`}}>{product.productName}</h5>
+                    <h6 className="card-text"  style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '6px',boxShadow: '5px 5px 10px rgba(244, 53, 10, 0.7)' , width: `${product.brandName.length+2}ch`}}>  {product.brandName}</h6>
                     <h6 className="card-text" style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '8px', boxShadow: '5px 5px 10px rgba(0, 82, 212, 0.7)' ,width: `${6}ch`}}>${product.price}</h6>
-                    <h6 className="card-text" style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '8px',boxShadow: '5px 5px 10px rgba(244, 53, 10, 0.7)' , width: `${9}ch`}}>Stock: {product.stack}</h6>
-                    <h6 className="card-text" style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '8px',boxShadow: '5px 5px 10px rgba(0, 82, 212, 0.7)' , width: `${17}ch`}}>Warranty: {product.warenty} years</h6>
-                    <h6 className="card-text" style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '8px', boxShadow: '5px 5px 10px rgba(244, 53, 10, 0.7)' ,width: `${25}ch`}}>Offer End Date: {product.offerEnd_date }</h6>
+                    <h6 className="card-text" style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '8px',boxShadow: '5px 5px 10px rgba(244, 53, 10, 0.7)' , width: `${9}ch`}}>Stock: {product.stock}</h6>
+                    <h6 className="card-text" style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '8px',boxShadow: '5px 5px 10px rgba(0, 82, 212, 0.7)' , width: `${17}ch`}}>Warranty: {product.warranty} years</h6>
+                    <h6 className="card-text" style={{ color: 'black',  background: 'white', padding: '5px', borderRadius: '8px', boxShadow: '5px 5px 10px rgba(244, 53, 10, 0.7)' ,width: `${25}ch`}}>Offer End Date: {product.offerEndDate }</h6>
                     <Info>
                       
-                    <Icon onClick={() => handleIconClick(product.product_ID)}>
+                    <Icon onClick={() => handleIconClick(product.id)}>
                       <ShoppingCartOutlined />
                     </Icon>
                       <Icon>

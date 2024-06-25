@@ -1,7 +1,7 @@
 .App {
   text-align:start;
 
-color: #61dafb;
+color: #1b1c1d;
 }
 
 h1{
@@ -37,7 +37,7 @@ label{
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(181, 133, 235);
 }
 
 .App-link {

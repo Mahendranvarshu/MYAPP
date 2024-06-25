@@ -4,13 +4,14 @@ h1 {
   font-size: 2em; /* Adjust font size as per your preference */
   padding: 20px; /* Adjust padding for desktop */
 }
-
-.h22 {
-  color: rgb(33, 50, 12);
+h2 {
+  color: rgb(12, 50, 49);
   text-shadow: violet;
-  font-size: 1.5em; /* Adjust font size as per your preference */
-  padding: 15px; /* Adjust padding for desktop */
+  font-size: 2em; /* Adjust font size as per your preference */
+  padding: 20px; /* Adjust padding for desktop */
 }
+
+
 
 .enter {
   color: rgb(31, 34, 34);
@@ -31,7 +32,7 @@ h1 {
 }
 
 .fill {
-  color: #cde1f2;
+  color: #141415;
 }
 
 .rectangular-container-p1 {

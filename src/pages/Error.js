@@ -1,21 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import scooterImage from "../img/scooter-4657.gif"; 
 
 const Container = styled.div`
   width: 100%;
-  height: 32vh;
+  height: 82vh;
   background-size: cover;
   display: flex;
-  border-radius:26px;
+  border-radius: 26px;
   align-items: top;
   justify-content: center;
   flex: 1;
   z-index: 999;
   min-width: 280px;
-  display: flex;
-  background: 
-  url("https://belajarhardwares.files.wordpress.com/2019/12/879663-amazing-windows-server-2018-wallpaper-1920x1080-hd-1080p-1.jpg?w=768")
-  center;
+  background-image: url(${scooterImage}); // Use the imported image
   background-color: #fcf5f5;
   padding: 20px;
 `;
@@ -27,20 +25,20 @@ const Error = () => {
 
   return (
     <Container>
-      <h1
-        className="c1"
-        style={{
-          color: "white",
-          
-          fontWeight: "bold",
-          fontSize: "30px",
-          padding: "20px",
-          borderRadius: "66px",
-       
-          textShadow: "6px 6px 8px red",
-          width: `${27}ch`,
-          textAlign: "center",
-        }}
+    <h1
+    className="c1"
+    style={{
+      color: "black",
+      fontWeight: "bold",
+      fontSize: "60px",
+      padding: "50px",
+      borderRadius: "66px",
+      textShadow: "6px 6px 9px red",
+      width: `${27}ch`,
+      textAlign: "right", // Adjust this property for horizontal alignment
+      marginTop: "50px",
+      marginRight:"-220px",// Example of vertical alignment using margin
+    }}
       >
         Backend Service Is Not Live. Wait for the Connection. Refresh the App...
         <button

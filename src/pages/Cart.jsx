@@ -216,6 +216,7 @@ const Button = styled.button`
 
     const [successMessage, setSuccessMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const [loading2, setLoading2] = useState(false);
    // Track progress
   
     const Bookorder = (price) => {
@@ -223,7 +224,7 @@ const Button = styled.button`
       setLoading(true);
       alert('Order Confirm');
       // Send a DELETE request to your server to remove the product from the cart
-      fetch(`http://18.183.156.88:8080/Order/Bookorder/${price}`, {
+      fetch(`https://mahishop-app.onrender.com/Order/Bookorder/${price}`, {
         method: 'POST',
       })
         .then((response) => {
@@ -237,9 +238,9 @@ const Button = styled.button`
         setTimeout(() => setSuccessMessage(""), 4000);
 
           } else {
-            setSuccessMessage( 'Order Already Placed' );
+            
             // Clear the success message after a certain time (e.g., 3 seconds)
-            setTimeout(() => setSuccessMessage("check Mail"), 3000);
+            setTimeout(() => setSuccessMessage(" Order Already Placed check your Mail"), 3000);
             alert('Order Already Placed');
             setLoading(false);
             
@@ -255,7 +256,7 @@ const Button = styled.button`
 const removeProduct = (productId) => {
   alert('Are you sure');
   // Send a DELETE request to your server to remove the product from the cart
-  fetch(`http://18.183.156.88:8080/Order/removeFromCart/${productId}`, {
+  fetch(`https://mahishop-app.onrender.com/Order/removeFromCart/${productId}`, {
     method: 'DELETE',
   })
     .then((response) => {
@@ -263,7 +264,7 @@ const removeProduct = (productId) => {
         // Product removed successfully, update the 
         
           const updatedProducts = products.filter(
-            (product) => product.product_ID !== productId
+            (product) => product.id!== productId
           );
         setProducts(updatedProducts);
       } else {
@@ -277,11 +278,18 @@ const removeProduct = (productId) => {
     const [products, setProducts] = useState([]);
   
     useEffect(() => {
+      setLoading2(true); // Set loading to true before fetching data
       // Fetch product data from your API
-      fetch("http://18.183.156.88:8080/Order/getcartP")
+      fetch("https://mahishop-app.onrender.com/Order/getcartP")
         .then((response) => response.json())
-        .then((data) => setProducts(data))
-        .catch((error) => console.error("Error fetching data:", error));
+        .then((data) => {
+          setProducts(data);
+          setLoading2(false); // Set loading to false after data is fetched
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          setLoading2(false); // Ensure loading is set to false on error too
+        });
     }, []);
   
     return (
@@ -298,28 +306,39 @@ const removeProduct = (productId) => {
           </Top>
           <Bottom>
           <OuterContainer>
+          {loading2 ?  (<SpinnerContainer>
+              <RotatingLines
+                strokeColor="blue"
+                strokeWidth="7"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+              />
+            </SpinnerContainer>
+            ):(
             <Info>
+            
               {products.map((product) => (
                
-                <Product key={product.product_ID}>
+                <Product key={product.id}>
 
                   <ProductDetail>
                     <Image src={`data:image/png;base64,${product.image}`} />
                     <Details>
                       <ProductName>
-                        <b>Product:</b> {product.product_name}
+                        <b>Product:</b> {product.productName}
                       </ProductName>
                       <ProductId>
-                        <b>Brand:</b> {product.brand_name}
+                        <b>Brand:</b> {product.brandName}
                       </ProductId>
-                      <ProductColor color={product.brand_name} />
+                      <ProductColor color={product.brandName} />
                       <ProductSize>
-                        <b>Warrenty:  {product.warenty}Year </b>
+                        <b>Warrenty:  {product.warranty}Year </b>
                       </ProductSize>
 
 
                       <Button
-  onClick={() => removeProduct(product.product_ID)}
+  onClick={() => removeProduct(product.id)}
   style={{
     color: 'white',
     background: 'linear-gradient(45deg, #FF5733, #0052D4)',
@@ -336,7 +355,7 @@ const removeProduct = (productId) => {
                   <PriceDetail>
                     <ProductAmountContainer>
                       <Add />
-                      <ProductAmount>{product.stack}</ProductAmount>
+                      <ProductAmount>{product.stock}</ProductAmount>
                       <Remove />
                     </ProductAmountContainer>
                     <ProductPrice>$ {product.price}</ProductPrice>
@@ -347,6 +366,7 @@ const removeProduct = (productId) => {
               ))}
               <Hr />
             </Info>
+            )}
               </OuterContainer>
             <Summary>
               <SummaryTitle>ORDER SUMMARY</SummaryTitle>
